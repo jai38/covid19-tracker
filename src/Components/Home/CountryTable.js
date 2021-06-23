@@ -69,7 +69,10 @@ export const CountryTable = ({ sortBy, handleSort, allCountries }) => {
             <th>
               <div>#</div>
             </th>
-            <th onClick={() => handleSort("Name")}>
+            <th
+              style={{ cursor: "pointer" }}
+              onClick={() => handleSort("Name")}
+            >
               <div className="d-flex justify-content-between align-items-center">
                 <div>Name</div>
                 {sortBy == "Name" && (
@@ -79,7 +82,10 @@ export const CountryTable = ({ sortBy, handleSort, allCountries }) => {
                 )}
               </div>
             </th>
-            <th onClick={() => handleSort("Active Cases")}>
+            <th
+              style={{ cursor: "pointer" }}
+              onClick={() => handleSort("Active Cases")}
+            >
               <div className="d-flex justify-content-between align-items-center">
                 <div>Active Cases</div>
                 {sortBy == "Active Cases" && (
@@ -89,7 +95,10 @@ export const CountryTable = ({ sortBy, handleSort, allCountries }) => {
                 )}
               </div>
             </th>
-            <th onClick={() => handleSort("New Cases")}>
+            <th
+              style={{ cursor: "pointer" }}
+              onClick={() => handleSort("New Cases")}
+            >
               <div className="d-flex justify-content-between align-items-center">
                 <div>New Cases</div>
                 {sortBy == "New Cases" && (
@@ -99,7 +108,10 @@ export const CountryTable = ({ sortBy, handleSort, allCountries }) => {
                 )}
               </div>
             </th>
-            <th onClick={() => handleSort("Total Cases")}>
+            <th
+              style={{ cursor: "pointer" }}
+              onClick={() => handleSort("Total Cases")}
+            >
               <div className="d-flex justify-content-between align-items-center">
                 <div>Total Cases</div>
                 {sortBy == "Total Cases" && (
@@ -109,7 +121,10 @@ export const CountryTable = ({ sortBy, handleSort, allCountries }) => {
                 )}
               </div>
             </th>
-            <th onClick={() => handleSort("Total Recovered")}>
+            <th
+              style={{ cursor: "pointer" }}
+              onClick={() => handleSort("Total Recovered")}
+            >
               <div className="d-flex justify-content-between align-items-center">
                 <div>Total Recovered</div>
                 {sortBy == "Total Recovered" && (
@@ -119,7 +134,10 @@ export const CountryTable = ({ sortBy, handleSort, allCountries }) => {
                 )}
               </div>
             </th>
-            <th onClick={() => handleSort("New Recovered")}>
+            <th
+              style={{ cursor: "pointer" }}
+              onClick={() => handleSort("New Recovered")}
+            >
               <div className="d-flex justify-content-between align-items-center">
                 <div>New Recovered</div>
                 {sortBy == "New Recovered" && (
@@ -129,7 +147,10 @@ export const CountryTable = ({ sortBy, handleSort, allCountries }) => {
                 )}
               </div>
             </th>
-            <th onClick={() => handleSort("Total Deaths")}>
+            <th
+              style={{ cursor: "pointer" }}
+              onClick={() => handleSort("Total Deaths")}
+            >
               <div className="d-flex justify-content-between align-items-center">
                 <div>Total Deaths</div>
                 {sortBy == "Total Deaths" && (
@@ -139,7 +160,10 @@ export const CountryTable = ({ sortBy, handleSort, allCountries }) => {
                 )}
               </div>
             </th>
-            <th onClick={() => handleSort("New Deaths")}>
+            <th
+              style={{ cursor: "pointer" }}
+              onClick={() => handleSort("New Deaths")}
+            >
               <div className="d-flex justify-content-between align-items-center">
                 <div>New Deaths</div>
                 {sortBy == "New Deaths" && (
