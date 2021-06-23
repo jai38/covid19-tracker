@@ -1,0 +1,11 @@
+.single-country {
+  flex-direction: row;
+}
+@media screen and (max-width: 780px) {
+  .single-country {
+    flex-direction: column;
+  }
+  .country-table-two {
+    margin-top: 5%;
+  }
+}

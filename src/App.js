@@ -8,12 +8,14 @@ import {
 import { Loader } from "./Common/Loader";
 import { Home } from "./Components/Home/Home";
 import { Past } from "./Components/Past/Past";
+import { Country } from "./Components/Country/Country";
 function App() {
   const [loading, setLoading] = useState(true);
   const [allCountries, setAllCountries] = useState();
   const [data, setData] = useState();
   const [countryList, setCountryList] = useState();
   const [sortBy, setSortBy] = useState("Active Cases");
+  const [reverse, setReverse] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [pastCountry, setPastCountry] = useState();
   const [pastData, setPastData] = useState();
@@ -44,6 +46,7 @@ function App() {
         });
       });
       currentPastData = currentPastData.reverse();
+      console.log(currentPastData);
       setPastData(currentPastData);
     }
   };
@@ -65,30 +68,60 @@ function App() {
     }
   }, [pastCountry]);
   const handleSort = (currentSortBy) => {
+    console.log(sortBy);
     let currentData = [];
     if (currentSortBy == "Name") {
-      currentData = data.sort((a, b) => (a.country > b.country ? 1 : -1));
+      if (reverse) {
+        currentData = data.sort((a, b) => (a.country > b.country ? 1 : -1));
+      } else {
+        currentData = data.sort((a, b) => (a.country > b.country ? -1 : 1));
+      }
+      setReverse(!reverse);
     }
     if (currentSortBy == "Active Cases") {
-      currentData = data.sort((a, b) => b.active - a.active);
+      currentData = data.sort((a, b) =>
+        reverse ? b.active - a.active : a.active - b.active
+      );
+
+      setReverse(!reverse);
     }
     if (currentSortBy == "New Cases") {
-      currentData = data.sort((a, b) => b.todayCases - a.todayCases);
+      currentData = data.sort((a, b) =>
+        reverse ? b.todayCases - a.todayCases : a.todayCases - b.todayCases
+      );
+      setReverse(!reverse);
     }
     if (currentSortBy == "Total Cases") {
-      currentData = data.sort((a, b) => b.cases - a.cases);
+      currentData = data.sort((a, b) =>
+        reverse ? b.cases - a.cases : a.cases - b.cases
+      );
+      setReverse(!reverse);
     }
     if (currentSortBy == "Total Recovered") {
-      currentData = data.sort((a, b) => b.recovered - a.recovered);
+      currentData = data.sort((a, b) =>
+        reverse ? b.recovered - a.recovered : a.recovered - b.recovered
+      );
+      setReverse(!reverse);
     }
     if (currentSortBy == "New Recovered") {
-      currentData = data.sort((a, b) => b.todayRecovered - a.todayRecovered);
+      currentData = data.sort((a, b) =>
+        reverse
+          ? b.todayRecovered - a.todayRecovered
+          : a.todayRecovered - b.todayRecovered
+      );
+      setReverse(!reverse);
     }
     if (currentSortBy == "Total Deaths") {
-      currentData = data.sort((a, b) => b.deaths - a.deaths);
+      currentData = data.sort((a, b) =>
+        reverse ? b.deaths - a.deaths : a.deaths - b.deaths
+      );
+      setReverse(!reverse);
     }
     if (currentSortBy == "New Deaths") {
-      currentData = data.sort((a, b) => b.todayDeaths - a.todayDeaths);
+      currentData = data.sort((a, b) =>
+        reverse ? b.todayDeaths - a.todayDeaths : a.todayDeaths - b.todayDeaths
+      );
+      setReverse(!reverse);
     }
     let reg = new RegExp(searchValue, "i");
     setAllCountries(currentData.filter((c) => c.country.match(reg)));
@@ -122,10 +155,12 @@ function App() {
                 />
               )}
             />
+            <Route path="/country" component={Country} />
             <Route
               path="/"
               component={() => (
                 <Home
+                  reverse={reverse}
                   showPast={true}
                   showSearch={true}
                   showCountryName={false}
@@ -134,6 +169,7 @@ function App() {
                   sortBy={sortBy}
                   handleSort={handleSort}
                   allCountries={allCountries}
+                  changeCountry={handlePastCountry}
                 />
               )}
             />

@@ -3,6 +3,7 @@ import { Header } from "../../Common/Header";
 import { CountryTable } from "./CountryTable";
 
 export const Home = ({
+  reverse,
   showPast,
   showSearch,
   showCountryName,
@@ -11,6 +12,7 @@ export const Home = ({
   sortBy,
   handleSort,
   allCountries,
+  changeCountry,
 }) => {
   return (
     <div>
@@ -22,9 +24,11 @@ export const Home = ({
         searchValue={searchValue}
       />
       <CountryTable
+        reverse={reverse}
         sortBy={sortBy}
         handleSort={handleSort}
         allCountries={allCountries}
+        changeCountry={changeCountry}
       />
     </div>
   );

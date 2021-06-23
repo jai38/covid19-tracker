@@ -6,7 +6,6 @@ export const PastTable = ({ pastData }) => {
     let [month, day, year] = data.date.split("/");
     year = "20" + year;
     let date = new Date(year + "-" + month + "-" + day);
-    console.log(date);
     let dateString = date.toDateString();
     return (
       <>

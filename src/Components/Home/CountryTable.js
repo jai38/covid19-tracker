@@ -1,13 +1,34 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import ImportExportIcon from "@material-ui/icons/ImportExport";
-export const CountryTable = ({ sortBy, handleSort, allCountries }) => {
+import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+import { useHistory } from "react-router-dom";
+export const CountryTable = ({
+  reverse,
+  sortBy,
+  handleSort,
+  allCountries,
+  changeCountry,
+}) => {
+  const history = useHistory();
+  const handleCountryClick = (countryName) => {
+    changeCountry(countryName);
+    history.push("/country", {
+      countryName,
+      // showPast: true,
+      // showSearch: false,
+      // showCountryName: true,
+    });
+  };
   const createRow = (country, index) => {
     return (
       <>
         <tr>
           <th>{index + 1}</th>
-          <th>{country.country}</th>
+          <th onClick={() => handleCountryClick(country.country)}>
+            {country.country}
+          </th>
           <th>{country.active.toLocaleString()}</th>
           <th>
             {country.todayCases != 0 && (
@@ -77,7 +98,7 @@ export const CountryTable = ({ sortBy, handleSort, allCountries }) => {
                 <div>Name</div>
                 {sortBy == "Name" && (
                   <div>
-                    <ImportExportIcon />
+                    {reverse ? <ArrowDownwardIcon /> : <ArrowUpwardIcon />}
                   </div>
                 )}
               </div>
@@ -90,7 +111,7 @@ export const CountryTable = ({ sortBy, handleSort, allCountries }) => {
                 <div>Active Cases</div>
                 {sortBy == "Active Cases" && (
                   <div>
-                    <ImportExportIcon />
+                    {reverse ? <ArrowDownwardIcon /> : <ArrowUpwardIcon />}
                   </div>
                 )}
               </div>
@@ -103,7 +124,7 @@ export const CountryTable = ({ sortBy, handleSort, allCountries }) => {
                 <div>New Cases</div>
                 {sortBy == "New Cases" && (
                   <div>
-                    <ImportExportIcon />
+                    {reverse ? <ArrowDownwardIcon /> : <ArrowUpwardIcon />}
                   </div>
                 )}
               </div>
@@ -116,7 +137,7 @@ export const CountryTable = ({ sortBy, handleSort, allCountries }) => {
                 <div>Total Cases</div>
                 {sortBy == "Total Cases" && (
                   <div>
-                    <ImportExportIcon />
+                    {reverse ? <ArrowDownwardIcon /> : <ArrowUpwardIcon />}
                   </div>
                 )}
               </div>
@@ -129,7 +150,7 @@ export const CountryTable = ({ sortBy, handleSort, allCountries }) => {
                 <div>Total Recovered</div>
                 {sortBy == "Total Recovered" && (
                   <div>
-                    <ImportExportIcon />
+                    {reverse ? <ArrowDownwardIcon /> : <ArrowUpwardIcon />}
                   </div>
                 )}
               </div>
@@ -142,7 +163,7 @@ export const CountryTable = ({ sortBy, handleSort, allCountries }) => {
                 <div>New Recovered</div>
                 {sortBy == "New Recovered" && (
                   <div>
-                    <ImportExportIcon />
+                    {reverse ? <ArrowDownwardIcon /> : <ArrowUpwardIcon />}
                   </div>
                 )}
               </div>
@@ -155,7 +176,7 @@ export const CountryTable = ({ sortBy, handleSort, allCountries }) => {
                 <div>Total Deaths</div>
                 {sortBy == "Total Deaths" && (
                   <div>
-                    <ImportExportIcon />
+                    {reverse ? <ArrowDownwardIcon /> : <ArrowUpwardIcon />}
                   </div>
                 )}
               </div>
@@ -168,7 +189,7 @@ export const CountryTable = ({ sortBy, handleSort, allCountries }) => {
                 <div>New Deaths</div>
                 {sortBy == "New Deaths" && (
                   <div>
-                    <ImportExportIcon />
+                    {reverse ? <ArrowDownwardIcon /> : <ArrowUpwardIcon />}
                   </div>
                 )}
               </div>

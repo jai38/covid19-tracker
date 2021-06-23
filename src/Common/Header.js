@@ -2,6 +2,7 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 import {
   Nav,
   Navbar,
@@ -13,7 +14,8 @@ import {
 export const Header = ({
   showPast,
   showSearch,
-  showSelectCountry,
+  showCountryName,
+  countryName,
   searchValue,
   handleSearch,
   countryList,
@@ -28,12 +30,17 @@ export const Header = ({
         <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
           <Nav className="mr-auto">
             {showPast && (
-              <Nav.Link
+              <Link
                 className="text-white btn btn-outline-warning mx-2 px-3 py-1 my-2"
-                href="/past"
+                to="/past"
               >
                 Past
-              </Nav.Link>
+              </Link>
+            )}
+            {showCountryName && (
+              <Nav.Item className="text-white mx-2 px-3 py-1 my-2">
+                <b style={{ fontSize: "120%" }}>{countryName}</b>
+              </Nav.Item>
             )}
           </Nav>
           {showSearch && (
