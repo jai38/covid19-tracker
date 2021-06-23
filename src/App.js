@@ -25,16 +25,26 @@ function App() {
     json = json.sort((a, b) => b.active - a.active);
     setAllCountries(json);
     setData(json);
-    console.log(json);
     setLoading(false);
   };
   const fetchPastCountry = async (pastCountry) => {
+    let currentPastData = [];
     const res = await fetch(
       `https://corona.lmao.ninja/v2/historical/${pastCountry}`
     );
     const json = await res.json();
     if (json.timeline) {
-      setPastData(json.timeline);
+      let dates = Object.keys(json.timeline.cases);
+      dates.forEach((date) => {
+        currentPastData.push({
+          date: date,
+          cases: json.timeline.cases[date],
+          recovered: json.timeline.recovered[date],
+          deaths: json.timeline.deaths[date],
+        });
+      });
+      currentPastData = currentPastData.reverse();
+      setPastData(currentPastData);
     }
   };
   useEffect(() => {
@@ -107,6 +117,7 @@ function App() {
                   showCountryName={false}
                   countryList={countryList}
                   handlePastCountry={handlePastCountry}
+                  pastCountry={pastCountry}
                   pastData={pastData}
                 />
               )}

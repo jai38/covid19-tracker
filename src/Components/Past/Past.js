@@ -11,6 +11,7 @@ export const Past = ({
   handleSearch,
   countryList,
   handlePastCountry,
+  pastCountry,
   pastData,
 }) => {
   console.log(pastData);
@@ -30,12 +31,14 @@ export const Past = ({
           id="debug"
           onChange={(e, value) => handlePastCountry(value)}
           debug
+          value={pastCountry}
+          noOptionsText={"No Country Found"}
           renderInput={(params) => (
             <TextField {...params} label="Select Country" margin="normal" />
           )}
         />
       </div>
-      <PastTable />
+      <PastTable pastData={pastData} />
     </>
   );
 };
