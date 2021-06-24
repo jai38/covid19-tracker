@@ -23,8 +23,10 @@ export const Header = ({
   return (
     <>
       <Navbar bg="dark" expand="lg" className="d-flex">
-        <Navbar.Brand className="text-white mx-3" href="/">
-          Covid 19 Tracker
+        <Navbar.Brand className="text-white mx-3">
+          <Link style={{ textDecoration: "none", color: "white" }} to="/home">
+            Covid 19 Tracker
+          </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
@@ -51,7 +53,6 @@ export const Header = ({
                 className="mx-5"
                 value={searchValue}
                 onChange={(e) => handleSearch(e.target.value)}
-                autoFocus={true}
               />
             </Form>
           )}

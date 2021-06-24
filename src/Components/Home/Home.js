@@ -15,7 +15,7 @@ export const Home = ({
   changeCountry,
 }) => {
   return (
-    <div>
+    <>
       <Header
         showCountryName={showCountryName}
         showPast={showPast}
@@ -30,6 +30,6 @@ export const Home = ({
         allCountries={allCountries}
         changeCountry={changeCountry}
       />
-    </div>
+    </>
   );
 };

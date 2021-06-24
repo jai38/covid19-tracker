@@ -26,7 +26,10 @@ export const CountryTable = ({
       <>
         <tr>
           <th>{index + 1}</th>
-          <th onClick={() => handleCountryClick(country.country)}>
+          <th
+            style={{ cursor: "pointer" }}
+            onClick={() => handleCountryClick(country.country)}
+          >
             {country.country}
           </th>
           <th>{country.active.toLocaleString()}</th>

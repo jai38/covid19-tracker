@@ -27,9 +27,15 @@ function App() {
     json = json.sort((a, b) => b.active - a.active);
     setAllCountries(json);
     setData(json);
+    let currentList = [];
+    json.forEach((country) => {
+      currentList.push(country.country);
+    });
+    setCountryList(currentList);
     setLoading(false);
   };
   const fetchPastCountry = async (pastCountry) => {
+    setLoading(true);
     let currentPastData = [];
     const res = await fetch(
       `https://corona.lmao.ninja/v2/historical/${pastCountry}`
@@ -49,26 +55,12 @@ function App() {
       console.log(currentPastData);
       setPastData(currentPastData);
     }
+    setLoading(false);
   };
   useEffect(() => {
     fetchCountries();
   }, []);
-  useEffect(() => {
-    let currentList = [];
-    if (data) {
-      data.forEach((country) => {
-        currentList.push(country.country);
-      });
-    }
-    setCountryList(currentList);
-  }, [data]);
-  useEffect(() => {
-    if (pastCountry) {
-      fetchPastCountry(pastCountry);
-    }
-  }, [pastCountry]);
   const handleSort = (currentSortBy) => {
-    console.log(sortBy);
     let currentData = [];
     if (currentSortBy == "Name") {
       if (reverse) {
@@ -128,12 +120,14 @@ function App() {
     setSortBy(currentSortBy);
   };
   const handleSearch = (currentSearchValue) => {
-    setSearchValue(currentSearchValue);
     let reg = new RegExp(currentSearchValue, "i");
-    setAllCountries(data.filter((c) => c.country.match(reg)));
+    let newCountries = data.filter((c) => c.country.match(reg));
+    setAllCountries([...newCountries]);
+    setSearchValue(currentSearchValue);
   };
   const handlePastCountry = (currentPastCountry) => {
     setPastCountry(currentPastCountry);
+    fetchPastCountry(currentPastCountry);
   };
   return (
     <>
@@ -143,8 +137,9 @@ function App() {
           <Switch>
             <Route
               path="/past"
-              component={() => (
+              render={(props) => (
                 <Past
+                  {...props}
                   showPast={false}
                   showSearch={false}
                   showCountryName={false}
@@ -158,8 +153,9 @@ function App() {
             <Route path="/country" component={Country} />
             <Route
               path="/"
-              component={() => (
+              render={(props) => (
                 <Home
+                  {...props}
                   reverse={reverse}
                   showPast={true}
                   showSearch={true}
